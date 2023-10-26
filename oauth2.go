@@ -207,6 +207,18 @@ func (c *Config) PasswordCredentialsToken(ctx context.Context, username, passwor
 	return retrieveToken(ctx, c, v)
 }
 
+func (c *Config) ClientCredentialTokens(ctx context.Context) (*Token, error) {
+	v := url.Values{
+		"grant_type":    {"client_credentials"},
+		"client_id":     {c.ClientID},
+		"client_secret": {c.ClientSecret},
+	}
+	if len(c.Scopes) > 0 {
+		v.Set("scope", strings.Join(c.Scopes, " "))
+	}
+	return retrieveToken(ctx, c, v)
+}
+
 // Exchange converts an authorization code into a token.
 //
 // It is used after a resource provider redirects the user back

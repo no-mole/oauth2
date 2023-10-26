@@ -11,7 +11,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"golang.org/x/oauth2"
+	"github.com/no-mole/oauth2"
 )
 
 var (
